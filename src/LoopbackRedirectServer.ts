@@ -25,9 +25,6 @@ export default class LoopbackRedirectServer {
     this._maybeRedirection = new Promise((resolve, reject) => {
       this._server = http.createServer((req, res) => {
         if (req.url && url.parse(req.url).pathname === callbackPath) {
-          res.writeHead(302, {
-            Location: successRedirectURL,
-          });
           res.end();
 
           resolve(url.resolve(`http://127.0.0.1:${port}`, req.url));
